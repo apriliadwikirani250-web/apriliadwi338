@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kediri Explore - Login & Promosi</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- HALAMAN LOGIN -->
+<section id="loginPage" class="page">
+    <div class="container">
+        <h2>Login</h2>
+        <input type="text" id="username" placeholder="Masukkan Nama" required>
+        <input type="text" id="region" placeholder="Daerah Asal" required>
+        <button onclick="login()">Login</button>
+    </div>
+</section>
+
+<!-- HALAMAN PROMOSI (TENGAH) -->
+<section id="promoPage" class="page" style="display:none;">
+    <div class="container">
+        <h2>Promosi Kediri Explore</h2>
+        <p>Temukan kuliner lezat dan wisata menarik di Kediri!</p>
+        <div class="card-container">
+            <div class="card">
+                <h3>Soto Kediri</h3>
+                <p>Soto khas Kediri, segar dan gurih.</p>
+            </div>
+            <div class="card">
+                <h3>Gunung Kelud</h3>
+                <p>Destinasi wisata alam dengan pemandangan spektakuler.</p>
+            </div>
+        </div>
+        <button onclick="nextPage()">Selanjutnya</button>
+    </div>
+</section>
+
+<!-- HALAMAN DASHBOARD / LOGOUT -->
+<section id="dashboardPage" class="page" style="display:none;">
+    <div class="container">
+        <h2>Selamat Datang, <span id="displayName"></span>!</h2>
+        <p>Daerah Asal Anda: <span id="displayRegion"></span></p>
+        <button onclick="logout()">Logout</button>
+    </div>
+</section>
+
+<script>
+// ==============================
+// LOGIN
+// ==============================
+function login() {
+    const name = document.getElementById('username').value.trim();
+    const region = document.getElementById('region').value.trim();
+
+    if(name === "" || region === "") {
+        alert("Silakan isi Nama dan Daerah Asal.");
+        return;
+    }
+
+    // Sembunyikan halaman login, tampilkan promosi
+    document.getElementById('loginPage').style.display = 'none';
+    document.getElementById('promoPage').style.display = 'block';
+
+    // Simpan data user
+    window.userName = name;
+    window.userRegion = region;
+}
+
+// ==============================
+// NEXT PAGE KE DASHBOARD
+// ==============================
+function nextPage() {
+    document.getElementById('promoPage').style.display = 'none';
+    document.getElementById('dashboardPage').style.display = 'block';
+
+    document.getElementById('displayName').innerText = window.userName;
+    document.getElementById('displayRegion').innerText = window.userRegion;
+}
+
+// ==============================
+// LOGOUT
+// ==============================
+function logout() {
+    document.getElementById('dashboardPage').style.display = 'none';
+    document.getElementById('loginPage').style.display = 'block';
+
+    // Reset input
+    document.getElementById('username').value = "";
+    document.getElementById('region').value = "";
+}
+</script>
+
+</body>
+</html>
